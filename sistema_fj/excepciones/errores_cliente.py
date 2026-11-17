@@ -1,16 +1,14 @@
 """
 Excepciones personalizadas relacionadas con clientes.
 
-ErrorSistemaFJ es la excepcion "padre" de todo el proyecto: la idea es que
-los otros integrantes del equipo tambien hereden de ella para sus propios
-errores (por ejemplo ErrorServicio o ErrorReserva), de modo que todo el
-sistema pueda manejar sus errores de forma unificada.
+ErrorValidacionCliente hereda de ErrorDatosInvalidos (ver errores_generales.py)
+porque, en el fondo, un cliente mal registrado siempre es un caso de "datos
+invalidos". Asi, el error se puede atrapar como algo especifico de clientes
+o, en un nivel mas general, como cualquier otro error de datos del sistema.
 """
 
-
-class ErrorSistemaFJ(Exception):
-    """Excepcion base de todo el sistema Software FJ."""
+from .errores_generales import ErrorDatosInvalidos
 
 
-class ErrorValidacionCliente(ErrorSistemaFJ):
+class ErrorValidacionCliente(ErrorDatosInvalidos):
     """Se lanza cuando los datos de un cliente no cumplen las reglas de validacion."""
