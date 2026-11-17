@@ -1,20 +1,27 @@
 """
 Excepciones personalizadas relacionadas con reservas.
 
-Todas heredan de ErrorSistemaFJ (definida en errores_cliente.py) para que
-todo el sistema pueda manejar sus errores de forma unificada.
+ErrorReserva es el error general de esta parte. Las otras dos excepciones
+heredan tanto de ErrorReserva como de su categoria general equivalente en
+errores_generales.py, para que se puedan atrapar de cualquiera de las dos
+formas: como un error especifico de reservas, o como un error general del
+sistema (operacion no permitida / servicio no disponible).
 """
 
-from .errores_cliente import ErrorSistemaFJ
+from .errores_generales import (
+    ErrorOperacionNoPermitida,
+    ErrorServicioNoDisponible as _ErrorServicioNoDisponibleGeneral,
+    ErrorSistemaFJ,
+)
 
 
 class ErrorReserva(ErrorSistemaFJ):
     """Error general relacionado con una reserva (datos invalidos, calculo fallido, etc.)."""
 
 
-class ErrorEstadoReserva(ErrorReserva):
+class ErrorEstadoReserva(ErrorReserva, ErrorOperacionNoPermitida):
     """Se lanza cuando se intenta una operacion que no es valida para el estado actual de la reserva."""
 
 
-class ErrorServicioNoDisponible(ErrorReserva):
+class ErrorServicioNoDisponible(ErrorReserva, _ErrorServicioNoDisponibleGeneral):
     """Se lanza cuando el servicio solicitado no esta disponible para reservar."""

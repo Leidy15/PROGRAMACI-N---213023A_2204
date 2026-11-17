@@ -13,7 +13,8 @@ Se usa try/except/else/finally y encadenamiento de excepciones (raise ... from)
 tal como lo pide la actividad.
 """
 
-from ..excepciones.errores_cliente import ErrorSistemaFJ, ErrorValidacionCliente
+from ..excepciones.errores_cliente import ErrorValidacionCliente
+from ..excepciones.errores_generales import ErrorSistemaFJ
 from ..modelos.cliente import Cliente
 from ..utilidades.registro_eventos import registrar_error, registrar_evento
 
